@@ -32,7 +32,6 @@ selectEl.addEventListener('change', function(){
     gameContainer.innerHTML = '';
     //attiva lo script solo alla selezione di 'lvl.1'
     if (this.value == '1'){
-        console.log('click lvl1');
         //per il lvl1 il numero di celle sarà di 100. (Matrice 10x10)
         const n_cells = 100;
         //le celle per ogni riga saranno la radice quadrata del n di celle totali
@@ -41,12 +40,24 @@ selectEl.addEventListener('change', function(){
     
         // funzione che genera il numero di celle in base al livello
          generateGrid (n_cells, n_cells_row);
-        console.log(cellEl);
     } //else if (x2: lvl2 e lvl3)
 
-
+    //seleziono gli elementi cella
+    const cellsEl = gameContainer.getElementsByClassName('cell');
+    //rendo clickabile ogni elemento cella
+    for (let i = 0; i < cellsEl.length; i++) {
+        cellsEl[i].addEventListener('click', function(){
+            this.style.backgroundColor = "#444";
+        });
+    }
 
 })
+
+
+
+
+
+
 
 
 
@@ -70,7 +81,6 @@ function generateGrid (nCells, nCellsRow) {
         divCell.className = 'cell';
         //inserisco il rispettivo numero indice all'interno della cella
         divCell.append(i);
-        console.log(divCell);
 
         //attribuisco a .cell una width e height variabile in base al lvl
         divCell.style.cssText = `
@@ -80,4 +90,6 @@ function generateGrid (nCells, nCellsRow) {
         //inserisco la cella dentro .game_container
         gameContainer.append(divCell);
     }
+
+
 }
