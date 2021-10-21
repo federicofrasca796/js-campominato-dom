@@ -19,3 +19,13 @@ La partita termina quando:
 - o raggiunge il numero massimo possibile di numeri consentiti.
 
 Al termine della partita il software deve scoprire tutte le bombe e comunicare il punteggio, cioè il numero di volte che l’utente ha inserito un numero consentito. */
+
+
+//DOM elements
+const lvl1 = document.querySelector('#lvl_choice > .lvl_1');
+const lvl2 = document.querySelector('#lvl_choice > .lvl_2');
+const lvl3 = document.querySelector('#lvl_choice > .lvl_3');
+
+const gameContainer = document.querySelector('.game_container');
+
+//l'utente indica un livello di difficoltà scegliendo dal dropdown menu.
