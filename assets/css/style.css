@@ -1,0 +1,35 @@
+:root{
+    --container_height: calc(100vh - (50px + 50px));
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+header, footer{
+    height: 50px;
+    line-height: 50px;
+    background-color: white;
+    text-align: center;
+}
+
+#lvl_choice{
+    padding: 2px;
+    margin: 0 5px;
+}
+
+.container{
+    height: var(--container_height);
+    background-color: rgb(225, 225, 225);
+}
+.game_container{
+    background-color: lightpink;
+    width: var(--container_height);
+    min-width: var(--container_height);
+    margin: auto;
+    height: 100%;
+    text-align: center;
+}
