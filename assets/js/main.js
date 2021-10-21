@@ -30,10 +30,13 @@ const gameContainer = document.querySelector('.game_container');
 selectEl.addEventListener('change', function(){
     //cancello la scritta placeholder
     gameContainer.innerHTML = '';
-    //attiva lo script solo alla selezione di 'lvl.1'
+    //dichiaro la variabile che conterrà il numero di celle in base alla difficoltà;
+    let n_cells;
+
+    //Scelta del livello tramite <select>
     if (this.value == '1'){
         //per il lvl1 il numero di celle sarà di 100. (Matrice 10x10)
-        const n_cells = 100;
+        n_cells = 100;
         //le celle per ogni riga saranno la radice quadrata del n di celle totali
         const n_cells_row = Math.sqrt(n_cells);
         
@@ -42,14 +45,35 @@ selectEl.addEventListener('change', function(){
          generateGrid (n_cells, n_cells_row);
     } //else if (x2: lvl2 e lvl3)
 
-    //seleziono gli elementi cella
-    const cellsEl = gameContainer.getElementsByClassName('cell');
+
+
+    //Genero le bombe
+    const bombs = [];
+
+    while (bombs.length < 16){
+        //genero 16 numeri casuali
+       const randomNum = getRandomIntInclusive(1, n_cells);
+
+        //se 'bombs' non contiene il numero random generato, inseriscilo nell'array. 
+       if (!bombs.includes(randomNum)){
+            bombs.push(randomNum);
+        }
+    }
+    console.log(bombs);
+
+
     //rendo clickabile ogni elemento cella
+    const cellsEl = gameContainer.getElementsByClassName('cell');
+
     for (let i = 0; i < cellsEl.length; i++) {
         cellsEl[i].addEventListener('click', function(){
             this.style.backgroundColor = "#444";
         });
     }
+    
+    //se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina
+    
+
 
 })
 
@@ -93,3 +117,17 @@ function generateGrid (nCells, nCellsRow) {
 
 
 }
+
+
+
+/**
+ * Genera un numero random compreso tra i valori indicati.
+ * @param {Number} min - numero minimo (incluso tra i numeri generati)
+ * @param {Number} max - numero massimo (incluso tra i numeri generati)
+ * @returns Restituisce un numero random tra min e max
+ */
+ function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
