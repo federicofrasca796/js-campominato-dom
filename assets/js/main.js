@@ -48,17 +48,7 @@ selectEl.addEventListener('change', function(){
 
 
     //Genero le bombe
-    const bombs = [];
-
-    while (bombs.length < 16){
-        //genero 16 numeri casuali
-       const randomNum = getRandomIntInclusive(1, n_cells);
-
-        //se 'bombs' non contiene il numero random generato, inseriscilo nell'array. 
-       if (!bombs.includes(randomNum)){
-            bombs.push(randomNum);
-        }
-    }
+    const bombs = generateBombs(n_cells);
     console.log(bombs);
 
 
@@ -68,13 +58,15 @@ selectEl.addEventListener('change', function(){
     for (let i = 0; i < cellsEl.length; i++) {
         cellsEl[i].addEventListener('click', function(){
             this.style.backgroundColor = "#444";
+            //se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina
+            if(bombs.includes(parseInt(cellsEl[i].innerText))){
+                this.style.backgroundColor = "red";
+                // gameContainer.innerHTML = '<h1>Game Over</h1>' //SOLUZIONE 1
+            }
+
         });
     }
     
-    //se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina
-    
-
-
 })
 
 
@@ -130,4 +122,26 @@ function generateGrid (nCells, nCellsRow) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1) + min);
-  }
+}
+
+
+
+/**
+ * Genera numeri random da 1 a 'maxRange' senza creare doppioni.
+ * @param {Number} maxRange Numero massimo entro il quale generare i numeri random.
+ * @returns Array riempito dei numeri random.
+ */
+function generateBombs (maxRange){
+const bombsList = [];
+
+while (bombsList.length < 16){
+    //genero 16 numeri casuali
+    const randomNum = getRandomIntInclusive(1, maxRange);
+
+    //se 'bombs' non contiene il numero random generato, inseriscilo nell'array. 
+    if (!bombsList.includes(randomNum)){
+        bombsList.push(randomNum);
+    }
+}
+return bombsList;
+}
