@@ -42,3 +42,10 @@ footer{
     color: #888;
     line-height: var(--container_height);
 }
+
+.cell{
+    border: 1px solid #888;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

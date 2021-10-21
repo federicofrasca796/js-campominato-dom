@@ -31,17 +31,20 @@ const start_h1 = document.querySelector('.game_container > h1');
 let numOfCells;
 
 selectEl.addEventListener('change', function(){
+    //cancello la scritta placeholder
+    start_h1.style.display = "none";
+
     //attiva lo script solo alla selezione di 'lvl.1'
     if (this.value == '1'){
         console.log('click lvl1');
         //per il lvl1 il numero di celle sarà di 100. (Matrice 10x10)
         const nCells = 100;
-        start_h1.style.display = "none";
-    
-
+        //le celle per ogni riga saranno la radice quadrata del n di celle totali
+        const nCellsRow = Math.sqrt(nCells);
         
-        // funzione che genera il numero di celle in base al livello
     
+        // funzione che genera il numero di celle in base al livello
+        
         //creo div.cell
         const divCell = document.createElement('div');
         //attribuisco la classe .cell
@@ -51,8 +54,11 @@ selectEl.addEventListener('change', function(){
         console.log(divCell);
 
         //attribuisco a .cell una width e height variabile in base al lvl
+        divCell.style.cssText = `
+        width: calc(100% / ${nCellsRow}); 
+        height: calc(100% / ${nCellsRow});`
 
-    
-        // gameContainer.append(divCell);
+        //inserisco la cella dentro .game_container
+        gameContainer.append(divCell);
     }
 })
