@@ -22,9 +22,7 @@ Al termine della partita il software deve scoprire tutte le bombe e comunicare i
 
 
 //DOM elements
-const lvl1 = document.querySelector('#lvl_choice > .lvl_1');
-const lvl2 = document.querySelector('#lvl_choice > .lvl_2');
-const lvl3 = document.querySelector('#lvl_choice > .lvl_3');
+const selectEl = document.getElementById('lvl_choice');
 
 const gameContainer = document.querySelector('.game_container');
 const start_h1 = document.querySelector('.game_container > h1');
@@ -32,20 +30,29 @@ const start_h1 = document.querySelector('.game_container > h1');
 //l'utente indica un livello di difficoltà clickando un lvl dal dropdown menu.
 let numOfCells;
 
-console.log(lvl1);
-lvl1.addEventListener('change', function(){
-    console.log('click lvl1');
-    //per il lvl1 il numero di celle sarà di 100. (Matrice 10x10)
-    // numOfCells = 100;
-    // start_h1.style.display= none;
+selectEl.addEventListener('change', function(){
+    //attiva lo script solo alla selezione di 'lvl.1'
+    if (this.value == '1'){
+        console.log('click lvl1');
+        //per il lvl1 il numero di celle sarà di 100. (Matrice 10x10)
+        const nCells = 100;
+        start_h1.style.display = "none";
+    
 
-    //funzione che genera il numero di celle in base al livello
+        
+        // funzione che genera il numero di celle in base al livello
+    
+        //creo div.cell
+        const divCell = document.createElement('div');
+        //attribuisco la classe .cell
+        divCell.className = 'cell';
+        //inserisco il rispettivo numero indice all'interno della cella
+        divCell.append(1);
+        console.log(divCell);
 
-    //creo div.cell
- /*    const divCell = document.createElement('div').className('cell');
-    console.log(divCell);
-    //attribuisco la classe .cell
-    // divCell.className('cell');
+        //attribuisco a .cell una width e height variabile in base al lvl
 
-    gameContainer.append(divCell); */
+    
+        // gameContainer.append(divCell);
+    }
 })
