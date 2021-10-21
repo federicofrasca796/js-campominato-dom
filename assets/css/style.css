@@ -37,3 +37,8 @@ footer{
     height: 100%;
     text-align: center;
 }
+.game_container > h1 {
+    font-weight: lighter;
+    color: #888;
+    line-height: var(--container_height);
+}
