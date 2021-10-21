@@ -25,32 +25,51 @@ Al termine della partita il software deve scoprire tutte le bombe e comunicare i
 const selectEl = document.getElementById('lvl_choice');
 
 const gameContainer = document.querySelector('.game_container');
-const start_h1 = document.querySelector('.game_container > h1');
 
 //l'utente indica un livello di difficoltà clickando un lvl dal dropdown menu.
-let numOfCells;
-
 selectEl.addEventListener('change', function(){
     //cancello la scritta placeholder
-    start_h1.style.display = "none";
-
+    gameContainer.innerHTML = '';
     //attiva lo script solo alla selezione di 'lvl.1'
     if (this.value == '1'){
         console.log('click lvl1');
         //per il lvl1 il numero di celle sarà di 100. (Matrice 10x10)
-        const nCells = 100;
+        const n_cells = 100;
         //le celle per ogni riga saranno la radice quadrata del n di celle totali
-        const nCellsRow = Math.sqrt(nCells);
+        const n_cells_row = Math.sqrt(n_cells);
         
     
         // funzione che genera il numero di celle in base al livello
-        
+         generateGrid (n_cells, n_cells_row);
+        console.log(cellEl);
+    } //else if (x2: lvl2 e lvl3)
+
+
+
+})
+
+
+
+
+
+
+
+//////////////////////////////////////// FUNCTIONS //////////////////////////////////////////////
+
+/**
+ * #### Genera una matrice quadrata con celle quadrate e numerate in sequenza.
+ * @param {number} nCells - Numero di celle totali
+ * @param {number} nCellsRow - Numero di celle per riga
+ */
+function generateGrid (nCells, nCellsRow) {
+    //ciclo per creare tante celle quante servono per livello.
+    for (let i = 1; i <= nCells ; i++) {
         //creo div.cell
         const divCell = document.createElement('div');
         //attribuisco la classe .cell
         divCell.className = 'cell';
         //inserisco il rispettivo numero indice all'interno della cella
-        divCell.append(1);
+        divCell.append(i);
         console.log(divCell);
 
         //attribuisco a .cell una width e height variabile in base al lvl
@@ -61,4 +80,4 @@ selectEl.addEventListener('change', function(){
         //inserisco la cella dentro .game_container
         gameContainer.append(divCell);
     }
-})
+}

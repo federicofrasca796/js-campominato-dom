@@ -30,21 +30,23 @@ footer{
     background-color: rgb(225, 225, 225);
 }
 .game_container{
-    background-color: lightpink;
     width: var(--container_height);
     min-width: var(--container_height);
-    margin: auto;
     height: 100%;
-    text-align: center;
+    margin: auto;
+    padding: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 .game_container > h1 {
     font-weight: lighter;
     color: #888;
-    line-height: var(--container_height);
 }
 
 .cell{
-    border: 1px solid #888;
+    border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
