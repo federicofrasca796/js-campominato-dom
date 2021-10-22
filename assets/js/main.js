@@ -48,26 +48,35 @@ selectEl.addEventListener('change', function(){
 
 
     //Genero le bombe
-    const bombs = generateBombs(n_cells);
+    let bombs = generateBombs(n_cells);
     console.log(bombs);
 
 
     //rendo clickabile ogni elemento cella
     const cellsEl = gameContainer.getElementsByClassName('cell');
+    
 
     for (let i = 0; i < cellsEl.length; i++) {
-        cellsEl[i].addEventListener('click', function(){
-            this.style.backgroundColor = "#444";
-            //se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina
-            if(bombs.includes(parseInt(cellsEl[i].innerText))){
-                this.style.backgroundColor = "red";
-                // gameContainer.innerHTML = '<h1>Game Over</h1>' //SOLUZIONE 1
-            }
+        const singleCell = cellsEl[i];
+        console.log(singleCell);
+        // singleCell.addEventListener('click', resultAfterClick)
+        singleCell.addEventListener('click', function (){
+            const singleCellNum = parseInt(singleCell.innerText)
 
-        });
+            if (isBomb(bombs, singleCellNum)){
+                this.style.backgroundColor = 'red';
+                console.log('is a bomb');
+            } else {
+                this.style.backgroundColor = 'cornflowerblue';
+                console.log('go on');
+            }
+        })
     }
     
 })
+
+
+
 
 
 
@@ -106,8 +115,6 @@ function generateGrid (nCells, nCellsRow) {
         //inserisco la cella dentro .game_container
         gameContainer.append(divCell);
     }
-
-
 }
 
 
@@ -145,3 +152,37 @@ while (bombsList.length < 16){
 }
 return bombsList;
 }
+
+/**
+ * Controlla se il numero è presente nell'array e restituisce una booleana.
+ * @param {Array} bombsList Array in cui controllare se CellNum è presente
+ * @param {Number} CellNum Numero della cella
+ * @returns Restituisce vero se la cella è presente nell'array, false se non è presente
+ */
+function isBomb(bombsList, CellNum){
+    if (bombsList.includes(CellNum)){
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Funzione per AddEventListener
+ */
+/*
+ function resultAfterClick () {
+    //- se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina,
+    //- altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
+    const singleCellNum = parseInt(this.innerText);
+
+    const bombBoole = isBomb(bombs, singleCellNum);
+    //devo selezionare le celle aventi lo stesso valore dei numeri nell'array bombs
+
+    while (bombBoole){
+        cellsBombs.style.backgroundColor = 'red';
+        this.removeEventListener('click', resultAfterClick)
+
+    }
+    this.style.backgroundColor = 'cornflowerblue';
+ // gameContainer.innerHTML = '<h1>Game Over</h1>' //SOLUZIONE 1
+} */
